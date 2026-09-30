@@ -1,0 +1,60 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/noto-sans-myanmar/400.css";
+@import "@fontsource/noto-sans-myanmar/600.css";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Geist Variable", "Noto Sans Myanmar", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink: #111111;
+  --color-paper: #fafaf7;
+  --color-red: #d73535;
+  --color-red-dark: #a92323;
+  --color-muted: #6b6b67;
+  --color-line: #e5e5df;
+  --color-surface: #f2f2ed;
+  --color-success: #27845a;
+  --color-warning: #c98a16;
+}
+
+/* Semantic tokens that flip in dark mode */
+:root {
+  --bg: var(--color-paper);
+  --fg: var(--color-ink);
+  --card: #ffffff;
+  --border: var(--color-line);
+}
+
+.dark {
+  --bg: #121214;
+  --fg: #f2f2ed;
+  --card: #1a1a1d;
+  --border: #2a2a2e;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Myanmar needs extra line height */
+:lang(my) {
+  line-height: 1.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
