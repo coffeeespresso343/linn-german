@@ -1,6 +1,12 @@
-import type { ReactNode } from "react";
+import { useTheme } from "@/features/profile/themeStore";
+import { MotionConfig } from "framer-motion";
+import { useEffect, type ReactNode } from "react";
 
-// Auth, theme, and language providers will be added in later
 export function Providers({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  const theme = useTheme((s) => s.theme);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  });
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

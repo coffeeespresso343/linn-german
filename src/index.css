@@ -15,12 +15,14 @@
   --color-paper: #fafaf7;
   --color-red: #d73535;
   --color-red-dark: #a92323;
-  --color-muted: #6b6b67;
+  /* --color-muted: #6b6b67; */
   --color-line: #e5e5df;
-  --color-surface: #f2f2ed;
+  /* --color-surface: #f2f2ed; */
   --color-success: #27845a;
   --color-warning: #c98a16;
 }
+
+
 
 /* Semantic tokens that flip in dark mode */
 :root {
@@ -28,6 +30,8 @@
   --fg: var(--color-ink);
   --card: #ffffff;
   --border: var(--color-line);
+  --muted: #6b6b67;
+  --surface: #f2f2ed;
 }
 
 .dark {
@@ -35,6 +39,17 @@
   --fg: #f2f2ed;
   --card: #1a1a1d;
   --border: #2a2a2e;
+  --muted: #a3a39d;
+  --surface: #232327;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
 }
 
 body {
@@ -47,6 +62,11 @@ body {
 /* Myanmar needs extra line height */
 :lang(my) {
   line-height: 1.8;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
