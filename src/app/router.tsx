@@ -2,7 +2,7 @@ import AppLayout from "@/components/layout/AppLayout";
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const Home = lazy(() => import("@/pages/Home"));
+const Home = lazy(() => import("@/pages/Home/Home"));
 const NotFound = () => <p className="p-8">Page not found.</p>;
 
 const Soon = ({ title }: { title: string }) => (
@@ -21,6 +21,8 @@ const router = createBrowserRouter([
       { path: "/practice", element: <Soon title="Practice" /> },
       { path: "/progress", element: <Soon title="Progress" /> },
       { path: "/profile", element: <Soon title="Profile" /> },
+      { path: "/learn/:level", element: <Soon title="Level" /> },
+      { path: "/register", element: <Soon title="Register" /> },
       { path: "*", element: <NotFound /> },
     ],
   },
