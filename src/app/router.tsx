@@ -1,8 +1,12 @@
 import AppLayout from "@/components/layout/AppLayout";
+import { AdminRoute, GuestRoute, ProtectedRoute } from "@/features/auth/guards";
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const Home = lazy(() => import("@/pages/Home/Home"));
+const LoginPage = lazy(() => import("@/pages/Auth/LoginPage"));
+const RegisterPage = lazy(() => import("@/pages/Auth/RegisterPage"));
+const ProfilePage = lazy(() => import("@/pages/Profile/ProfilePage"));
 const NotFound = () => <p className="p-8">Page not found.</p>;
 
 const Soon = ({ title }: { title: string }) => (
@@ -18,11 +22,34 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/learn", element: <Soon title="Learn" /> },
-      { path: "/practice", element: <Soon title="Practice" /> },
-      { path: "/progress", element: <Soon title="Progress" /> },
-      { path: "/profile", element: <Soon title="Profile" /> },
       { path: "/learn/:level", element: <Soon title="Level" /> },
-      { path: "/register", element: <Soon title="Register" /> },
+      { path: "/practice", element: <Soon title="Practice" /> },
+
+      // Guest only
+      {
+        element: <GuestRoute />,
+        children: [
+          { path: "/login", element: <LoginPage /> },
+          { path: "/register", element: <RegisterPage /> },
+        ],
+      },
+
+      // Signed-in users
+
+      {
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/dashboard", element: <Soon title="Dashboard" /> },
+          { path: "/progress", element: <Soon title="Progress" /> },
+          { path: "/profile", element: <ProfilePage /> },
+        ],
+      },
+
+      {
+        element: <AdminRoute />,
+        children: [{ path: "/admin", element: <Soon title="Admin" /> }],
+      },
+
       { path: "*", element: <NotFound /> },
     ],
   },
