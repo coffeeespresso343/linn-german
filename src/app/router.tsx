@@ -7,6 +7,8 @@ const Home = lazy(() => import("@/pages/Home/Home"));
 const LoginPage = lazy(() => import("@/pages/Auth/LoginPage"));
 const RegisterPage = lazy(() => import("@/pages/Auth/RegisterPage"));
 const ProfilePage = lazy(() => import("@/pages/Profile/ProfilePage"));
+
+const ContentCheck = lazy(() => import("@/pages/Dev/ContentCheck"));
 const NotFound = () => <p className="p-8">Page not found.</p>;
 
 const Soon = ({ title }: { title: string }) => (
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/learn", element: <Soon title="Learn" /> },
       { path: "/learn/:level", element: <Soon title="Level" /> },
       { path: "/practice", element: <Soon title="Practice" /> },
+      { path: "/dev/content", element: <ContentCheck /> },
 
       // Guest only
       {

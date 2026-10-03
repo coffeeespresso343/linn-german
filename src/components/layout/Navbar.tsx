@@ -70,7 +70,7 @@ const Navbar = () => {
 
         <Link
           to="/profile"
-          className="rounded-full bg-surface h-9 w-9 flex items-center justify-center"
+          className="rounded-full shrink-0 bg-surface h-9 w-9 flex items-center justify-center"
         >
           <span className="font-medium">{profile?.first_name?.[0] ?? "-"}</span>
         </Link>
