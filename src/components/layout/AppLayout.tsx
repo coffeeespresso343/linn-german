@@ -1,10 +1,16 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import Navbar from "./Navbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import BottomNav from "./BottomNav";
 import Footer from "./Footer";
 
 const AppLayout = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location]);
+
   return (
     <div className="flex min-h-dvh flex-col">
       <a
