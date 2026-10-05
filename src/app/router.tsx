@@ -12,6 +12,7 @@ const ContentCheck = lazy(() => import("@/pages/Dev/ContentCheck"));
 
 const LearnPage = lazy(() => import("@/pages/Learn"));
 const LevelPage = lazy(() => import("@/pages/Learn/LevelPage"));
+const LessonPage = lazy(() => import("@/pages/Lesson"));
 
 const NotFound = () => <p className="p-8">Page not found.</p>;
 
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/learn", element: <LearnPage /> },
       { path: "/learn/:level", element: <LevelPage /> },
+      { path: "/lesson/:lessonId", element: <LessonPage /> },
       { path: "/dev/content", element: <ContentCheck /> },
 
       // Guest only

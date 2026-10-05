@@ -86,6 +86,7 @@ export interface LessonSection {
 
 export interface Lesson extends LessonSummary {
   levelId: string;
+  levelCode: LevelCode;
   courseId: string;
   isPublished: boolean;
   sections: LessonSection[];

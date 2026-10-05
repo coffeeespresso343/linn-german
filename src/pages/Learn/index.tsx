@@ -21,7 +21,7 @@ const LearnPage = () => {
       </p>
 
       {!user && (
-        <p className="mt-4 text-sm text-muted">
+        <p className="mt-4 rounded-xl p-3 bg-surface text-sm text-muted">
           <Link to="/login" className="font-medium text-fg underline">
             Login
           </Link>{" "}

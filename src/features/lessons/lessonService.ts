@@ -99,7 +99,7 @@ export async function fetchLevelWithCourses(
 export async function fetchLessons(slug: string): Promise<Lesson | null> {
   const { data, error } = await supabase
     .from("lessons")
-    .select("*, lesson_sections(*)")
+    .select("*, levels(code), lesson_sections(*)")
     .eq("slug", slug)
     .order("sort_order", { referencedTable: "lesson_sections" })
     .maybeSingle();
@@ -117,6 +117,7 @@ export async function fetchLessons(slug: string): Promise<Lesson | null> {
   return {
     ...toSummary(data),
     levelId: data.level_id,
+    levelCode: data.levels.code as LevelCode,
     courseId: data.course_id,
     isPublished: data.is_published,
     sections,

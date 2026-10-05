@@ -20,3 +20,38 @@ export async function fetchUserProgress(userId: string): Promise<LessonProgress[
     status: r.status as LessonProgress["status"],
   }));
 }
+
+// --- Saving progress
+
+/**
+ * Insert only if no row exists yet, so a completed lesson is never downgraded
+ * @param userId
+ * @param lessonId
+ */
+export async function startLesson(userId: string, lessonId: string) {
+  const { error } = await supabase
+    .from("user_progress")
+    .upsert(
+      { user_id: userId, lesson_id: lessonId, status: "in_progress" },
+      { onConflict: "user_id,lesson_id", ignoreDuplicates: true },
+    );
+
+  if (error) throw error;
+}
+
+export async function completeLesson(userId: string, lessonId: string, xp: number) {
+  const { error } = await supabase.from("user_progress").upsert(
+    {
+      user_id: userId,
+      lesson_id: lessonId,
+      status: "completed",
+      xp_earned: xp,
+      completed_at: new Date().toISOString(),
+    },
+    {
+      onConflict: "user_id,lesson_id",
+    },
+  );
+
+  if (error) throw error;
+}

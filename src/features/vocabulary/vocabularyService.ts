@@ -72,3 +72,14 @@ export async function fetchVocabularyWord(id: string): Promise<Vocabulary | null
 
   return data ? toVocabulary(data) : null;
 }
+
+export async function fetchVocabularyByIds(ids: string[]): Promise<Vocabulary[]> {
+  if (ids.length === 0) return [];
+  const { data, error } = await supabase.from("vocabulary").select(SELECT).in("id", ids);
+
+  if (error) throw error;
+
+  const byId = new Map(data.map((r) => [r.id, toVocabulary(r)]));
+
+  return ids.flatMap((id) => byId.get(id) ?? []); // keep lesson's order
+}

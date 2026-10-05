@@ -24,7 +24,7 @@ const LessonRow = ({ lesson, status }: Props) => {
     <li>
       <Link
         to={`/lesson/${lesson.slug}`}
-        className="flex items-center gap-4 rounded-xl px-3 py-3 transition-colors hover:bg-surface"
+        className="flex items-center gap-4 bg-surface/60 rounded-xl px-2 py-3 transition-colors hover:bg-surface"
       >
         <Icon
           size={20}

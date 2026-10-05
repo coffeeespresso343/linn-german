@@ -1,6 +1,7 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
   fetchVacabularyPage,
+  fetchVocabularyByIds,
   fetchVocabularyWord,
   type VocabularyFilters,
 } from "./vocabularyService";
@@ -16,4 +17,10 @@ export const useVocabularyWord = (id: string) =>
   useQuery({
     queryKey: ["vocabulary", id],
     queryFn: () => fetchVocabularyWord(id),
+  });
+
+export const useVocabularyByIds = (ids: string[]) =>
+  useQuery({
+    queryKey: ["vocabulary", "ids", ids],
+    queryFn: () => fetchVocabularyByIds(ids),
   });

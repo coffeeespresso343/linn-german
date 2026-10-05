@@ -31,7 +31,7 @@ const UnitCard = ({ course, statuses }: Props) => {
       </div>
 
       {course.lessons.length > 0 ? (
-        <ul className="mt-3">
+        <ul className="mt-3 space-y-2">
           {course.lessons.map((l) => (
             <LessonRow
               key={l.id}
