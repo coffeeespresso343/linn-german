@@ -101,6 +101,7 @@ export interface VocabularyExample {
 
 export interface Vocabulary {
   id: string;
+  slug: string;
   german: string;
   article?: Article;
   plural?: string;

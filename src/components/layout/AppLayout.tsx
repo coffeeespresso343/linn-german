@@ -21,7 +21,7 @@ const AppLayout = () => {
       </a>
       <Navbar />
       <main id="main" className="flex-1 pb-20 md:pb-0">
-        <Suspense fallback={<p className="p-8 text-muted">Loading</p>}>
+        <Suspense fallback={<p className="p-8 text-muted">Loading...</p>}>
           <Outlet />
         </Suspense>
       </main>

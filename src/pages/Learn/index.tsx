@@ -1,5 +1,6 @@
 import { ErrorBlock } from "@/components/shared/PageStatus";
 import Reveal from "@/components/shared/Reveal";
+import { ButtonLink } from "@/components/ui/Button";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useAuth } from "@/features/auth/useAuth";
 import LevelCard from "@/features/lessons/components/LevelCard";
@@ -19,6 +20,11 @@ const LearnPage = () => {
       <p className="mt-2 max-w-xl text-lg text-muted">
         Pick a level and work through it unit by unit.
       </p>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        <ButtonLink to="/vocabulary">Vocabulary</ButtonLink>
+        <ButtonLink to="/pronunciation">Pronunciation</ButtonLink>
+      </div>
 
       {!user && (
         <p className="mt-4 rounded-xl p-3 bg-surface text-sm text-muted">

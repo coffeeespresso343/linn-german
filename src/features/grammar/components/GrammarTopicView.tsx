@@ -35,7 +35,7 @@ const GrammarTopicView = ({ topic }: { topic: GrammarTopic }) => {
       {examples.success && examples.data.length > 0 && (
         <ul className="space-y-3">
           {examples.data.map((e) => {
-            const tr = pickTranslation(e, lang);
+            const tr = pickTranslation({ en: e.en, my: e.my }, lang);
 
             return (
               <li key={e.de} className="flex items-start gap-2">

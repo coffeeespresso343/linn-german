@@ -14,6 +14,7 @@ type Row = Tables<"vocabulary"> & {
 
 const toVocabulary = (row: Row): Vocabulary => ({
   id: row.id,
+  slug: row.slug,
   german: row.german,
   article: (row.article as Article | null) ?? undefined,
   plural: row.plural ?? undefined,
@@ -37,7 +38,7 @@ export interface VocabularyFilters {
   pageSize?: number;
 }
 
-export async function fetchVacabularyPage(
+export async function fetchVocabularyPage(
   filters: VocabularyFilters = {},
 ): Promise<Page<Vocabulary>> {
   const { levelCode, category, page = 0, pageSize = 24 } = filters;
@@ -61,11 +62,11 @@ export async function fetchVacabularyPage(
   };
 }
 
-export async function fetchVocabularyWord(id: string): Promise<Vocabulary | null> {
+export async function fetchVocabularyWord(slug: string): Promise<Vocabulary | null> {
   const { data, error } = await supabase
     .from("vocabulary")
     .select(SELECT)
-    .eq("id", id)
+    .eq("slug", slug)
     .maybeSingle();
 
   if (error) throw error;
@@ -82,4 +83,26 @@ export async function fetchVocabularyByIds(ids: string[]): Promise<Vocabulary[]>
   const byId = new Map(data.map((r) => [r.id, toVocabulary(r)]));
 
   return ids.flatMap((id) => byId.get(id) ?? []); // keep lesson's order
+}
+
+export async function fetchVocabularyBySlug(slug: string): Promise<Vocabulary | null> {
+  const { data, error } = await supabase
+    .from("vocabulary")
+    .select(SELECT)
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data ? toVocabulary(data) : null;
+}
+
+export async function fetchVocabularyCategories(): Promise<string[]> {
+  const { data, error } = await supabase
+    .from("vocabulary")
+    .select("category")
+    .not("category", "is", null);
+
+  if (error) throw error;
+
+  return [...new Set(data.map((r) => r.category as string))].sort();
 }

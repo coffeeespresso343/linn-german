@@ -14,6 +14,12 @@ const LearnPage = lazy(() => import("@/pages/Learn"));
 const LevelPage = lazy(() => import("@/pages/Learn/LevelPage"));
 const LessonPage = lazy(() => import("@/pages/Lesson"));
 
+const VocabularyPage = lazy(() => import("@/pages/Vocabulary"));
+const VocabularyDetailPage = lazy(
+  () => import("@/pages/Vocabulary/VocabularyDetailPage"),
+);
+const PronunciationPage = lazy(() => import("@/pages/Pronunciation"));
+
 const NotFound = () => <p className="p-8">Page not found.</p>;
 
 const Soon = ({ title }: { title: string }) => (
@@ -31,6 +37,10 @@ const router = createBrowserRouter([
       { path: "/learn", element: <LearnPage /> },
       { path: "/learn/:level", element: <LevelPage /> },
       { path: "/lesson/:lessonId", element: <LessonPage /> },
+      { path: "/vocabulary", element: <VocabularyPage /> },
+      { path: "/vocabulary/:wordId", element: <VocabularyDetailPage /> },
+      { path: "/pronunciation", element: <PronunciationPage /> },
+
       { path: "/dev/content", element: <ContentCheck /> },
 
       // Guest only
